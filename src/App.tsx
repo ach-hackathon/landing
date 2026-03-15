@@ -201,10 +201,10 @@ function App() {
               <Paper p="lg" className="hero-proof-strip">
                 <SimpleGrid cols={{ base: 1, sm: 3 }} spacing="md">
                   <Stack gap={2}>
-                    <Text className="hero-proof-value">3</Text>
+                    <Text className="hero-proof-value">4</Text>
                     <Text fw={700}>проекта</Text>
                     <Text size="sm" c="dimmed">
-                      PoC для B2B, и работающее решение Eventigo
+                      Платформа, PoC для B2B, работающее решение Eventigo, решение для выдачи наград и подарков
                     </Text>
                   </Stack>
                   <Stack gap={2}>
@@ -325,8 +325,8 @@ function App() {
       <Container size="xl" className="section">
         <SectionHeading
           eyebrow="Механики"
-          title="Гибкость от простого QR до полноценной reward economy"
-          description="Для pitch это важно: продукт выглядит не как узкий инструмент, а как конструктор, который можно адаптировать под разный бизнес и аудиторию."
+          title="Максимальная гибкость"
+          description="Конструктор, который можно адаптировать под разный бизнес и аудиторию."
         />
 
         <SimpleGrid cols={{ base: 1, sm: 2, lg: 3 }} spacing="lg" mt="xl">
@@ -371,10 +371,6 @@ function App() {
           <Group justify="space-between" mb="lg">
             <Stack gap={2}>
               <Title order={3}>Почему это сильнее типичных B2B-only конкурентов</Title>
-              <Text c="dimmed">
-                В презентации это можно подавать как отличие от решений вроде
-                Mambo и Gametize.
-              </Text>
             </Stack>
             <Badge size="lg" color="pink">
               Levely vs market
@@ -410,9 +406,7 @@ function App() {
                 <Text fw={800}>Levely</Text>
               </Group>
               <Text c="dimmed" maw={520}>
-                Больше, чем платформа. Глубже, чем игра. Landing page для
-                презентации hackathon-проекта о геймификации событий, команд и
-                сообществ.
+                Больше, чем платформа. Глубже, чем игра.
               </Text>
             </Stack>
 

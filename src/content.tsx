@@ -146,7 +146,7 @@ export const mechanics: Mechanic[] = [
     icon: <IconCoin size={22} stroke={1.8} />,
   },
   {
-    title: "Корпоративный store",
+    title: "Корпоративный магазин",
     description: "Награды превращают активность в ощутимую ценность и возврат в систему.",
     icon: <IconGift size={22} stroke={1.8} />,
   },
