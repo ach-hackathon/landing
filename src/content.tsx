@@ -3,7 +3,6 @@ import {
   IconAffiliate,
   IconArrowUpRight,
   IconBolt,
-  IconBrain,
   IconBuildingBank,
   IconChartBar,
   IconCoin,
@@ -19,12 +18,9 @@ type LinkCard = {
   title: string;
   description: string;
   href: string;
-};
-
-type StatCard = {
-  value: string;
-  title: string;
-  description: string;
+  badge: string;
+  cta: string;
+  accent: "indigo" | "pink" | "blue";
 };
 
 type Segment = {
@@ -52,48 +48,30 @@ type Model = {
   note: string;
 };
 
-type UseCase = {
-  title: string;
-  subtitle: string;
-  description: string;
-  bullets: string[];
-  href: string;
-  tone: "blue" | "pink" | "violet";
-};
-
 export const heroLinks: LinkCard[] = [
   {
     title: "Levely Admin",
     description: "Админ-панель платформы: сценарии, награды, события и real-time аналитика.",
     href: "http://panel.stg.eventigo.io/",
+    badge: "Главная платформа",
+    cta: "Открыть админ-панель",
+    accent: "indigo",
   },
   {
     title: "Eventigo",
     description: "B2C приложение для публичных, локальных и фестивальных активностей.",
     href: "https://eventigo.io/",
+    badge: "B2C приложение",
+    cta: "Открыть Eventigo",
+    accent: "pink",
   },
   {
     title: "My HR PoC",
     description: "Демонстрация white-label интеграции Levely в корпоративный портал.",
     href: "https://stg.ilovehr.ink/",
-  },
-];
-
-export const keyStats: StatCard[] = [
-  {
-    value: "10-15%",
-    title: "низкая конверсия корпоративных мероприятий",
-    description: "Организаторам сложно удерживать внимание участников дольше первых активностей.",
-  },
-  {
-    value: "$438B",
-    title: "потерь мировой экономики из-за падения вовлеченности",
-    description: "Gallup оценивает масштабы проблемы как системные, а не локальные.",
-  },
-  {
-    value: "$36.5B -> $92.5B",
-    title: "рост рынка геймификации с 2026 по 2030",
-    description: "CAGR 26-28% подтверждает, что спрос на управляемую вовлеченность только ускоряется.",
+    badge: "White-label PoC",
+    cta: "Открыть My HR",
+    accent: "blue",
   },
 ];
 
@@ -202,45 +180,6 @@ export const businessModels: Model[] = [
   },
 ];
 
-export const useCases: UseCase[] = [
-  {
-    title: "My HR",
-    subtitle: "PoC B2B интеграции",
-    description: "Пример того, как Levely превращается в слой вовлечения внутри корпоративного портала.",
-    bullets: [
-      "челленджи, награды и прогресс прямо в рабочем интерфейсе",
-      "white-label без необходимости запускать отдельное приложение",
-      "удобный сценарий для HR, обучения и внутренних коммуникаций",
-    ],
-    href: "https://stg.ilovehr.ink/",
-    tone: "blue",
-  },
-  {
-    title: "Eventigo",
-    subtitle: "B2C приложение",
-    description: "Публичные и доступные события для фестивалей, локальных активностей и комьюнити.",
-    bullets: [
-      "быстрый запуск механик для широкой аудитории",
-      "потенциал для семейных сценариев и городских маршрутов",
-      "готовая витрина для роста B2C направления",
-    ],
-    href: "https://eventigo.io/",
-    tone: "pink",
-  },
-  {
-    title: "Levely Panel",
-    subtitle: "Операционный центр",
-    description: "Админ-панель, где собираются сценарии, reward logic и live статистика.",
-    bullets: [
-      "единая точка управления событиями",
-      "гибкая настройка механик от QR до сложных цепочек",
-      "аналитика в моменте для администраторов и организаторов",
-    ],
-    href: "http://panel.stg.eventigo.io/",
-    tone: "violet",
-  },
-];
-
 export const differentiationRows = [
   {
     capability: "Один стек для B2B и B2C",
@@ -264,32 +203,6 @@ export const differentiationRows = [
   },
 ];
 
-export const futureIdeas = [
-  "AI-генерация сценариев, событий и заданий по краткому брифу",
-  "Расширение каталога механик и reward-экономики",
-  "Новые интеграции с HR, loyalty и event products",
-  "Масштабирование в marketplace готовых челленджей",
-];
-
-export const analyticsHighlights = [
-  {
-    label: "Активные пользователи",
-    value: "74%",
-  },
-  {
-    label: "Средняя глубина сценария",
-    value: "18 мин",
-  },
-  {
-    label: "Конверсия в reward claim",
-    value: "61%",
-  },
-  {
-    label: "Топ-канал вовлечения",
-    value: "QR + quests",
-  },
-];
-
 export const footerLinks = [
   {
     label: "Открыть Levely",
@@ -305,10 +218,5 @@ export const footerLinks = [
     label: "Посмотреть My HR",
     href: "https://stg.ilovehr.ink/",
     icon: IconUsersGroup,
-  },
-  {
-    label: "AI roadmap",
-    href: "#future",
-    icon: IconBrain,
   },
 ];

@@ -1,5 +1,4 @@
 import {
-  ActionIcon,
   Anchor,
   Badge,
   Box,
@@ -10,7 +9,6 @@ import {
   Grid,
   Group,
   Paper,
-  RingProgress,
   SimpleGrid,
   Stack,
   Table,
@@ -21,23 +19,17 @@ import {
 import {
   IconArrowRight,
   IconArrowUpRight,
-  IconBolt,
-  IconChartHistogram,
   IconCircleCheck,
   IconSparkles,
 } from "@tabler/icons-react";
 import {
-  analyticsHighlights,
   businessModels,
   differentiationRows,
   ecosystemLayers,
   footerLinks,
-  futureIdeas,
   heroLinks,
-  keyStats,
   mechanics,
   targetSegments,
-  useCases,
 } from "./content";
 
 type SectionHeadingProps = {
@@ -70,58 +62,51 @@ function SectionHeading({
   );
 }
 
-type ProductPreviewProps = {
-  title: string;
-  subtitle: string;
-  tone: "blue" | "pink" | "violet";
+type HeroLinkCardProps = {
+  link: (typeof heroLinks)[number];
+  featured?: boolean;
 };
 
-function ProductPreview({ title, subtitle, tone }: ProductPreviewProps) {
+function HeroLinkCard({ link, featured = false }: HeroLinkCardProps) {
   return (
-    <Paper className={`preview-card preview-${tone}`} shadow="glow" p="lg">
-      <Group justify="space-between" mb="lg">
-        <Stack gap={2}>
-          <Text fw={800}>{title}</Text>
-          <Text size="sm" c="dimmed">
-            {subtitle}
+    <Paper
+      component="a"
+      href={link.href}
+      target="_blank"
+      rel="noreferrer"
+      p={featured ? "xl" : "lg"}
+      className={`hero-demo-card hero-demo-card-${link.accent}${featured ? " hero-demo-card-featured" : ""}`}
+    >
+      <Group justify="space-between" align="flex-start" wrap="nowrap" gap="md">
+        <Stack gap="sm" flex={1}>
+          <Badge
+            size="md"
+            color={link.accent === "blue" ? "blue" : link.accent}
+            className="hero-demo-badge"
+          >
+            {link.badge}
+          </Badge>
+          <Text className={featured ? "hero-demo-title hero-demo-title-lg" : "hero-demo-title"}>
+            {link.title}
+          </Text>
+          <Text c="dimmed" className="hero-demo-text">
+            {link.description}
           </Text>
         </Stack>
-        <ActionIcon variant="white" color="dark" radius="xl" size="lg">
-          <IconArrowUpRight size={18} />
-        </ActionIcon>
+
+        <ThemeIcon radius="xl" size={featured ? 54 : 48} className="hero-demo-icon">
+          <IconArrowUpRight size={featured ? 24 : 20} />
+        </ThemeIcon>
       </Group>
-      <Stack gap="sm">
-        <Paper className="preview-panel" p="md">
-          <Group justify="space-between">
-            <Text size="sm" fw={700}>
-              Активный сценарий
-            </Text>
-            <Badge color="indigo">live</Badge>
-          </Group>
-          <Text className="preview-stat">+120 XP</Text>
-          <Text size="sm" c="dimmed">
-            QR-маршрут и reward economy запущены в реальном времени
-          </Text>
-        </Paper>
-        <SimpleGrid cols={2} spacing="sm">
-          <Paper className="preview-mini" p="md">
-            <Text size="xs" tt="uppercase" c="dimmed" fw={700}>
-              engagement
-            </Text>
-            <Text fw={800} size="xl">
-              74%
-            </Text>
-          </Paper>
-          <Paper className="preview-mini" p="md">
-            <Text size="xs" tt="uppercase" c="dimmed" fw={700}>
-              rewards
-            </Text>
-            <Text fw={800} size="xl">
-              61%
-            </Text>
-          </Paper>
-        </SimpleGrid>
-      </Stack>
+
+      <Group justify="space-between" align="center" mt={featured ? "xl" : "lg"}>
+        <Text fw={800} className="hero-demo-cta">
+          {link.cta}
+        </Text>
+        <Text size="sm" c="dimmed">
+          Открыть
+        </Text>
+      </Group>
     </Paper>
   );
 }
@@ -142,17 +127,11 @@ function App() {
           </Group>
 
           <Group gap="xs" visibleFrom="sm">
-            <Anchor href="#problem" c="dark" fw={600}>
-              Проблема
+            <Anchor href="#market" c="dark" fw={600}>
+              Рынок
             </Anchor>
             <Anchor href="#ecosystem" c="dark" fw={600}>
               Экосистема
-            </Anchor>
-            <Anchor href="#cases" c="dark" fw={600}>
-              Кейсы
-            </Anchor>
-            <Anchor href="#future" c="dark" fw={600}>
-              Roadmap
             </Anchor>
           </Group>
 
@@ -163,7 +142,7 @@ function App() {
             rel="noreferrer"
             rightSection={<IconArrowUpRight size={18} />}
           >
-            Open demo
+            Открыть демо
           </Button>
         </Flex>
       </Container>
@@ -219,160 +198,69 @@ function App() {
                 </Button>
               </Group>
 
-              <SimpleGrid cols={{ base: 1, sm: 3 }} spacing="md">
-                {heroLinks.map((link) => (
-                  <Paper
-                    key={link.title}
-                    component="a"
-                    href={link.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    p="lg"
-                    className="link-card"
-                  >
-                    <Group justify="space-between" align="flex-start" mb="sm">
-                      <Text fw={800}>{link.title}</Text>
-                      <IconArrowUpRight size={18} />
-                    </Group>
+              <Paper p="lg" className="hero-proof-strip">
+                <SimpleGrid cols={{ base: 1, sm: 3 }} spacing="md">
+                  <Stack gap={2}>
+                    <Text className="hero-proof-value">3</Text>
+                    <Text fw={700}>проекта</Text>
                     <Text size="sm" c="dimmed">
-                      {link.description}
+                      PoC для B2B, и работающее решение Eventigo
                     </Text>
-                  </Paper>
-                ))}
-              </SimpleGrid>
+                  </Stack>
+                  <Stack gap={2}>
+                    <Text className="hero-proof-value">B2B + B2C</Text>
+                    <Text fw={700}>одна платформа</Text>
+                    <Text size="sm" c="dimmed">
+                      От white-label интеграций до публичных событий
+                    </Text>
+                  </Stack>
+                  <Stack gap={2}>
+                    <Text className="hero-proof-value">Real-time</Text>
+                    <Text fw={700}>аналитика и сценарии</Text>
+                    <Text size="sm" c="dimmed">
+                      Вовлеченность, награды и активность в моменте
+                    </Text>
+                  </Stack>
+                </SimpleGrid>
+              </Paper>
             </Stack>
           </Grid.Col>
 
           <Grid.Col span={{ base: 12, lg: 5 }}>
-            <Stack gap="md" className="hero-visual-wrap">
-              <ProductPreview
-                title="Levely Control"
-                subtitle="Admin panel for live gamification"
-                tone="violet"
-              />
-              <Group grow align="stretch">
-                <ProductPreview
-                  title="Eventigo"
-                  subtitle="B2C public events"
-                  tone="pink"
-                />
-                <ProductPreview
-                  title="My HR"
-                  subtitle="White-label B2B"
-                  tone="blue"
-                />
-              </Group>
-            </Stack>
-          </Grid.Col>
-        </Grid>
-      </Container>
+            <Paper p="xl" className="hero-demo-board">
+              <Stack gap="lg">
+                <Group justify="space-between" align="flex-start" gap="md">
+                  <Stack gap="sm" maw={360}>
+                    <Badge size="lg" color="grape">
+                      Демо-ссылки     
+                    </Badge>
+                    <Title order={3} className="hero-demo-board-title">
+                      Результат нашей работы на хакатоне
+                    </Title>
+                    <Text c="dimmed">
+                      Админ-панель, B2C приложение и white-label
+                    </Text>
+                  </Stack>
 
-      <Container size="xl" className="section" id="problem">
-        <SectionHeading
-          eyebrow="Проблема"
-          title="Вовлеченность проседает, а организаторы видят это слишком поздно"
-          description="Сегодня механики разрознены, внимание участников быстро теряется, а команда не получает live-сигналов о том, что реально работает."
-        />
-
-        <SimpleGrid cols={{ base: 1, md: 3 }} spacing="lg" mt="xl">
-          {keyStats.map((stat) => (
-            <Paper key={stat.title} p="xl" className="surface-card">
-              <Text className="metric-value">{stat.value}</Text>
-              <Text fw={800} mt="sm" size="lg">
-                {stat.title}
-              </Text>
-              <Text c="dimmed" mt="sm">
-                {stat.description}
-              </Text>
-            </Paper>
-          ))}
-        </SimpleGrid>
-
-        <Grid gutter="lg" mt="xl">
-          <Grid.Col span={{ base: 12, md: 7 }}>
-            <Paper p="xl" className="surface-card highlight-card">
-              <Group gap="sm" mb="md">
-                <ThemeIcon size="lg" radius="xl" color="indigo">
-                  <IconBolt size={18} />
-                </ThemeIcon>
-                <Text fw={800} size="lg">
-                  Почему это болит прямо сейчас
-                </Text>
-              </Group>
-              <Stack gap="md">
-                <Group align="flex-start" wrap="nowrap">
-                  <ThemeIcon variant="light" color="indigo" radius="xl">
-                    <IconCircleCheck size={16} />
+                  <ThemeIcon radius="xl" size={56} className="hero-demo-board-icon">
+                    <IconArrowUpRight size={24} />
                   </ThemeIcon>
-                  <Text>
-                    Участники выпадают из сценария, если нет понятного прогресса,
-                    награды и быстрых точек действия.
-                  </Text>
                 </Group>
-                <Group align="flex-start" wrap="nowrap">
-                  <ThemeIcon variant="light" color="pink" radius="xl">
-                    <IconCircleCheck size={16} />
-                  </ThemeIcon>
-                  <Text>
-                    Организаторы не могут оперативно менять механику, если
-                    аналитика появляется только постфактум.
-                  </Text>
-                </Group>
-                <Group align="flex-start" wrap="nowrap">
-                  <ThemeIcon variant="light" color="grape" radius="xl">
-                    <IconCircleCheck size={16} />
-                  </ThemeIcon>
-                  <Text>
-                    Бизнесу нужен один гибкий стек, который работает и для
-                    внутренних порталов, и для публичных событий.
-                  </Text>
-                </Group>
-              </Stack>
-            </Paper>
-          </Grid.Col>
 
-          <Grid.Col span={{ base: 12, md: 5 }}>
-            <Paper p="xl" className="trend-card">
-              <Text fw={800} size="lg">
-                Growth signal
-              </Text>
-              <Text c="dimmed" mt="xs">
-                Рынок геймификации растет быстро, а значит выигрывают платформы,
-                которые закрывают сразу несколько сегментов.
-              </Text>
-              <Stack gap="md" mt="lg">
-                <Box>
-                  <Group justify="space-between" mb={6}>
-                    <Text size="sm" fw={700}>
-                      2026
-                    </Text>
-                    <Text size="sm" fw={700}>
-                      $36.5B
-                    </Text>
-                  </Group>
-                  <Box className="trend-bar trend-bar-sm" />
-                </Box>
-                <Box>
-                  <Group justify="space-between" mb={6}>
-                    <Text size="sm" fw={700}>
-                      2030
-                    </Text>
-                    <Text size="sm" fw={700}>
-                      $92.5B
-                    </Text>
-                  </Group>
-                  <Box className="trend-bar trend-bar-lg" />
-                </Box>
-                <Badge size="lg" color="coral">
-                  CAGR 26-28%
-                </Badge>
+                <HeroLinkCard link={heroLinks[0]} featured />
+
+                <Stack gap="md">
+                  {heroLinks.slice(1).map((link) => (
+                    <HeroLinkCard key={link.title} link={link} />
+                  ))}
+                </Stack>
               </Stack>
             </Paper>
           </Grid.Col>
         </Grid>
       </Container>
 
-      <Container size="xl" className="section">
+      <Container size="xl" className="section" id="market">
         <SectionHeading
           eyebrow="Рынок"
           title="Levely играет сразу в двух направлениях роста"
@@ -510,257 +398,6 @@ function App() {
               ))}
             </Table.Tbody>
           </Table>
-        </Paper>
-      </Container>
-
-      <Container size="xl" className="section" id="cases">
-        <SectionHeading
-          eyebrow="Кейсы и демо"
-          title="Три входа в продукт: B2B white-label, B2C приложение и core-панель"
-          description="Эти ссылки можно показывать на демо или вставлять прямо в презентацию как подтверждение, что у идеи уже есть форма."
-        />
-
-        <SimpleGrid cols={{ base: 1, lg: 3 }} spacing="lg" mt="xl">
-          {useCases.map((useCase) => (
-            <Paper key={useCase.title} p="xl" className="surface-card case-card">
-              <Badge
-                size="lg"
-                color={
-                  useCase.tone === "blue"
-                    ? "indigo"
-                    : useCase.tone === "pink"
-                      ? "pink"
-                      : "grape"
-                }
-              >
-                {useCase.subtitle}
-              </Badge>
-              <Title order={3} mt="lg" mb="xs">
-                {useCase.title}
-              </Title>
-              <Text c="dimmed">{useCase.description}</Text>
-
-              <Paper className={`case-preview case-preview-${useCase.tone}`} p="lg" mt="lg">
-                <Group justify="space-between" mb="md">
-                  <Text fw={800}>Scenario snapshot</Text>
-                  <Badge color="dark">demo</Badge>
-                </Group>
-                <SimpleGrid cols={2} spacing="sm">
-                  <Paper p="sm" className="case-preview-stat">
-                    <Text size="xs" tt="uppercase" c="dimmed">
-                      users
-                    </Text>
-                    <Text fw={800} size="xl">
-                      2.4k
-                    </Text>
-                  </Paper>
-                  <Paper p="sm" className="case-preview-stat">
-                    <Text size="xs" tt="uppercase" c="dimmed">
-                      actions
-                    </Text>
-                    <Text fw={800} size="xl">
-                      8.1k
-                    </Text>
-                  </Paper>
-                </SimpleGrid>
-              </Paper>
-
-              <Stack gap="sm" mt="lg">
-                {useCase.bullets.map((bullet) => (
-                  <Group key={bullet} wrap="nowrap" align="flex-start">
-                    <ThemeIcon size="sm" radius="xl" color="indigo" variant="light">
-                      <IconCircleCheck size={12} />
-                    </ThemeIcon>
-                    <Text>{bullet}</Text>
-                  </Group>
-                ))}
-              </Stack>
-
-              <Button
-                component="a"
-                href={useCase.href}
-                target="_blank"
-                rel="noreferrer"
-                variant="white"
-                mt="xl"
-                rightSection={<IconArrowUpRight size={18} />}
-              >
-                Открыть демо
-              </Button>
-            </Paper>
-          ))}
-        </SimpleGrid>
-      </Container>
-
-      <Container size="xl" className="section">
-        <SectionHeading
-          eyebrow="Аналитика"
-          title="Live-статистика делает Levely управляемым продуктом, а не просто набором активностей"
-          description="Для организаторов важно видеть не только факт участия, но и глубину сценария, reward funnel и динамику по сегментам уже во время ивента."
-        />
-
-        <Grid gutter="lg" mt="xl">
-          <Grid.Col span={{ base: 12, lg: 7 }}>
-            <Paper p="xl" className="surface-card analytics-board">
-              <Group justify="space-between" align="flex-start" mb="xl">
-                <Stack gap={4}>
-                  <Text fw={800} size="lg">
-                    Analytics board
-                  </Text>
-                  <Text c="dimmed">
-                    Полная статистика по участникам, событиям и активностям.
-                  </Text>
-                </Stack>
-                <ThemeIcon size={48} radius="xl" color="indigo">
-                  <IconChartHistogram size={24} />
-                </ThemeIcon>
-              </Group>
-
-              <SimpleGrid cols={{ base: 2, sm: 4 }} spacing="md">
-                {analyticsHighlights.map((item) => (
-                  <Paper key={item.label} p="md" className="analytics-metric">
-                    <Text size="xs" tt="uppercase" c="dimmed">
-                      {item.label}
-                    </Text>
-                    <Text fw={800} size="xl" mt={6}>
-                      {item.value}
-                    </Text>
-                  </Paper>
-                ))}
-              </SimpleGrid>
-
-              <Grid mt="lg">
-                <Grid.Col span={{ base: 12, sm: 7 }}>
-                  <Paper p="lg" className="analytics-graph">
-                    <Text fw={800} mb="md">
-                      Completion pulse
-                    </Text>
-                    <Box className="line-chart">
-                      <span />
-                      <span />
-                      <span />
-                      <span />
-                    </Box>
-                  </Paper>
-                </Grid.Col>
-                <Grid.Col span={{ base: 12, sm: 5 }}>
-                  <Paper p="lg" className="analytics-graph">
-                    <Text fw={800} mb="md">
-                      Reward claim
-                    </Text>
-                    <RingProgress
-                      size={180}
-                      thickness={20}
-                      sections={[
-                        { value: 61, color: "#5a62ff" },
-                        { value: 21, color: "#ff5db1" },
-                        { value: 18, color: "#d7dbff" },
-                      ]}
-                      label={
-                        <Text fw={800} ta="center" size="xl">
-                          61%
-                        </Text>
-                      }
-                    />
-                  </Paper>
-                </Grid.Col>
-              </Grid>
-            </Paper>
-          </Grid.Col>
-
-          <Grid.Col span={{ base: 12, lg: 5 }}>
-            <Paper p="xl" className="surface-card">
-              <Title order={3}>Что это дает бизнесу</Title>
-              <Stack gap="md" mt="lg">
-                <Group align="flex-start" wrap="nowrap">
-                  <ThemeIcon radius="xl" color="indigo" variant="light">
-                    <IconCircleCheck size={16} />
-                  </ThemeIcon>
-                  <Text>Команда видит провалы и сильные точки сценария без ожидания финального отчета.</Text>
-                </Group>
-                <Group align="flex-start" wrap="nowrap">
-                  <ThemeIcon radius="xl" color="pink" variant="light">
-                    <IconCircleCheck size={16} />
-                  </ThemeIcon>
-                  <Text>Администратор может менять механику, награды и push-точки прямо в ходе события.</Text>
-                </Group>
-                <Group align="flex-start" wrap="nowrap">
-                  <ThemeIcon radius="xl" color="grape" variant="light">
-                    <IconCircleCheck size={16} />
-                  </ThemeIcon>
-                  <Text>Это превращает вовлеченность из красивой идеи в измеримый KPI.</Text>
-                </Group>
-              </Stack>
-            </Paper>
-          </Grid.Col>
-        </Grid>
-      </Container>
-
-      <Container size="xl" className="section" id="future">
-        <Paper p="xl" className="final-cta">
-          <Grid gutter="xl" align="center">
-            <Grid.Col span={{ base: 12, lg: 7 }}>
-              <Stack gap="lg">
-                <Badge size="lg" color="pink">
-                  Финал и масштабирование
-                </Badge>
-                <Title order={2} className="section-title">
-                  Следующий шаг: AI, новые механики и еще более бесшовные интеграции
-                </Title>
-                <Text size="lg" c="dimmed">
-                  Levely уже выглядит как платформа, а не просто концепт. Следующая
-                  точка роста — AI-генерация сценариев, событий и заданий, чтобы
-                  запуск геймификации стал еще быстрее и масштабируемее.
-                </Text>
-                <SimpleGrid cols={{ base: 1, sm: 2 }} spacing="sm">
-                  {futureIdeas.map((idea) => (
-                    <Paper key={idea} p="md" className="future-item">
-                      <Group wrap="nowrap" align="flex-start">
-                        <ThemeIcon radius="xl" color="pink" variant="light">
-                          <IconCircleCheck size={16} />
-                        </ThemeIcon>
-                        <Text>{idea}</Text>
-                      </Group>
-                    </Paper>
-                  ))}
-                </SimpleGrid>
-              </Stack>
-            </Grid.Col>
-
-            <Grid.Col span={{ base: 12, lg: 5 }}>
-              <Paper p="xl" className="closing-card">
-                <Text className="closing-kicker">Levely</Text>
-                <Title order={3} mt="sm" mb="md">
-                  Универсальная платформа геймификации для B2B и B2C
-                </Title>
-                <Text c="dimmed">
-                  Показывает ценность за минуту, выглядит убедительно на сцене и
-                  уже имеет демо-точки для презентации.
-                </Text>
-                <Stack gap="sm" mt="xl">
-                  <Button
-                    component="a"
-                    href="http://panel.stg.eventigo.io/"
-                    target="_blank"
-                    rel="noreferrer"
-                    rightSection={<IconArrowUpRight size={18} />}
-                  >
-                    Открыть Levely Admin
-                  </Button>
-                  <Button
-                    component="a"
-                    href="https://stg.ilovehr.ink/"
-                    target="_blank"
-                    rel="noreferrer"
-                    variant="white"
-                    rightSection={<IconArrowUpRight size={18} />}
-                  >
-                    Посмотреть My HR PoC
-                  </Button>
-                </Stack>
-              </Paper>
-            </Grid.Col>
-          </Grid>
         </Paper>
       </Container>
 
