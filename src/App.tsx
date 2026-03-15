@@ -204,7 +204,7 @@ function App() {
                     <Text className="hero-proof-value">4</Text>
                     <Text fw={700}>проекта</Text>
                     <Text size="sm" c="dimmed">
-                      Платформа, PoC для B2B, работающее решение Eventigo, решение для выдачи наград и подарков
+                      Платформа, PoC для B2B, работающее решение Eventigo, решение для выдачи наград и подарков                    
                     </Text>
                   </Stack>
                   <Stack gap={2}>
@@ -232,7 +232,7 @@ function App() {
                 <Group justify="space-between" align="flex-start" gap="md">
                   <Stack gap="sm" maw={360}>
                     <Badge size="lg" color="grape">
-                      Демо-ссылки     
+                      Демо-ссылки
                     </Badge>
                     <Title order={3} className="hero-demo-board-title">
                       Результат нашей работы на хакатоне

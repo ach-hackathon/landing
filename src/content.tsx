@@ -73,6 +73,14 @@ export const heroLinks: LinkCard[] = [
     cta: "Открыть My HR",
     accent: "blue",
   },
+  {
+    title: "Презентация",
+    description: "PDF-дек для защиты проекта, структуры питча и демонстрации ценности Levely.",
+    href: "/presentation.pdf",
+    badge: "Pitch deck",
+    cta: "Открыть PDF",
+    accent: "pink",
+  },
 ];
 
 export const targetSegments: Segment[] = [
@@ -218,5 +226,10 @@ export const footerLinks = [
     label: "Посмотреть My HR",
     href: "https://stg.ilovehr.ink/",
     icon: IconUsersGroup,
+  },
+  {
+    label: "Открыть презентацию",
+    href: "/presentation.pdf",
+    icon: IconArrowUpRight,
   },
 ];
